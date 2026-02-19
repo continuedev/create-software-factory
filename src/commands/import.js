@@ -11,21 +11,29 @@ export function importCommand(program) {
     .command('import')
     .description('Import .continue/checks and agents from a GitHub repo')
     .requiredOption('--from <repo>', 'GitHub repo (owner/repo)')
+    .option('--path <path>', 'Subdirectory within the repo to import from')
     .option('--token <token>', 'GitHub token for private repos')
     .option('--branch <branch>', 'Branch to fetch from')
     .option('--dir <path>', 'Target directory', process.cwd())
     .action(async (opts) => {
-      const { from: repo, token, branch, dir } = opts;
+      const { from: repo, path: subPath, token, branch, dir } = opts;
       const fetchOpts = { token, branch };
 
+      const checksDir = subPath
+        ? `${subPath}/.continue/checks`
+        : '.continue/checks';
+      const agentsDir = subPath
+        ? `${subPath}/.continue/agents`
+        : '.continue/agents';
+
       console.log();
-      const spinner = ora(`Fetching from ${repo}...`).start();
+      const spinner = ora(`Fetching from ${repo}${subPath ? `/${subPath}` : ''}...`).start();
 
       let checks, agents;
       try {
         [checks, agents] = await Promise.all([
-          fetchDirectory(repo, '.continue/checks', fetchOpts),
-          fetchDirectory(repo, '.continue/agents', fetchOpts),
+          fetchDirectory(repo, checksDir, fetchOpts),
+          fetchDirectory(repo, agentsDir, fetchOpts),
         ]);
       } catch (err) {
         spinner.fail(err.message);
