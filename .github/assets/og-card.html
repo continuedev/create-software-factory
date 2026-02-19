@@ -9,26 +9,36 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html {
+    background: #1a1a2e;
+  }
   body {
     width: 1280px;
     height: 640px;
     overflow: hidden;
     font-family: 'IBM Plex Sans', -apple-system, sans-serif;
-    background: #1a1a2e;
     position: relative;
   }
 
   /* Watercolor background */
   .bg-image {
     position: absolute;
-    inset: 0;
-    background: url('./og-bg.png') center/cover no-repeat;
+    top: 0; left: 0;
+    width: 1280px;
+    height: 640px;
+  }
+  .bg-image img {
+    width: 1280px;
+    height: 640px;
+    display: block;
   }
 
   /* Gradient overlay — darker on left for text, transparent on right for icon */
   .bg-wash {
     position: absolute;
-    inset: 0;
+    top: 0; left: 0;
+    width: 1280px;
+    height: 640px;
     background: linear-gradient(
       to right,
       rgba(10, 10, 30, 0.7) 0%,
@@ -42,7 +52,7 @@
     position: relative;
     z-index: 1;
     width: 660px;
-    height: 100%;
+    height: 640px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -97,12 +107,11 @@
     transform: translateY(-50%);
     width: 520px;
     height: 520px;
-    opacity: 1;
   }
 </style>
 </head>
 <body>
-  <div class="bg-image"></div>
+  <div class="bg-image"><img src="./og-bg-card.png" alt=""></div>
   <div class="bg-wash"></div>
   <div class="content">
     <p class="label">Continue</p>
