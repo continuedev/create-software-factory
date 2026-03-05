@@ -8,6 +8,8 @@
 
 <p align="center">Scaffold and import <code>.continue/agents/</code> and <code>.continue/checks/</code> from curated templates or any GitHub repo.</p>
 
+<p align="center"><em>An autonomous codebase built by the <a href="https://continue.dev/blueprint">Continue Software Factory</a></em></p>
+
 ---
 
 ## Why?
